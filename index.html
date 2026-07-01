@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Akshat Dutt Bhatt — Web Developer</title>
+<meta name="description" content="Akshat Dutt Bhatt is a web developer focused on building fast, accessible interfaces." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340..680&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f6f3ec;
+    --ink: #211e1a;
+    --ink-soft: #5c574a;
+    --ink-faint: #948c79;
+    --line: #ddd5c2;
+    --rust: #b8512f;
+    --rust-deep: #8a3c20;
+    --moss: #4a5d44;
+    --cream: #fffaf0;
+    --dark: #211e1a;
+    --dark-line: #3c372d;
+    --on-dark: #f2ede1;
+    --on-dark-soft: #b3ab97;
+    --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px;
+    --space-5:48px; --space-6:72px; --space-7:108px;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif; font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--rust); color:var(--cream); }
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--rust); outline-offset:3px; }
+  h1,h2{ font-family:'Fraunces',Georgia,serif; font-weight:500; margin:0; letter-spacing:-0.01em; }
+  img{ max-width:100%; display:block; }
+
+  .frame{ max-width:1080px; margin:0 auto; padding:0 var(--space-4); }
+  .wide{ max-width:1280px; margin:0 auto; padding:0 var(--space-4); }
+
+  header.top{
+    position:sticky; top:0; z-index:30;
+    background: rgba(246,243,236,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header.top .frame{
+    padding-top:18px; padding-bottom:18px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .mark{ font-family:'Fraunces',serif; font-size:18px; text-decoration:none; display:flex; align-items:center; gap:8px; }
+  .mark .dot{ width:9px; height:9px; border-radius:50%; background:var(--rust); display:inline-block; }
+  header.top nav{ display:flex; gap:var(--space-4); align-items:center; }
+  header.top nav a{ font-family:'JetBrains Mono',monospace; font-size:12px; text-decoration:none; color:var(--ink-soft); letter-spacing:0.03em; }
+  header.top nav a:hover{ color:var(--rust); }
+  .nav-cta{
+    font-family:'Inter',sans-serif !important; font-weight:600 !important; font-size:13px !important;
+    background:var(--ink); color:var(--cream) !important; padding:9px 16px; border-radius:99px;
+  }
+  .nav-cta:hover{ background:var(--rust) !important; }
+  @media (max-width:680px){ header.top nav a:not(.nav-cta){ display:none; } }
+
+  /* ---- HERO ---- */
+  .hero{ position:relative; padding: var(--space-7) 0 var(--space-6); overflow:hidden; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.3fr 0.9fr; gap: var(--space-6); align-items:center;
+  }
+  .hero .kicker{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--rust);
+    display:flex; align-items:center; gap:8px; margin:0 0 var(--space-3);
+  }
+  .kicker::before{ content:""; width:22px; height:1.5px; background:var(--rust); }
+  .hero h1{ font-size:clamp(36px,4.8vw,58px); line-height:1.08; }
+  .hero h1 .accent-word{ color:var(--rust); font-style:italic; }
+  .hero .lede{
+    margin-top:var(--space-3); max-width:480px; color:var(--ink-soft); font-size:17.5px;
+  }
+  .hero .actions{ margin-top:var(--space-4); display:flex; gap:var(--space-2); flex-wrap:wrap; }
+  .btn{
+    font-family:'Inter',sans-serif; font-size:14.5px; font-weight:600;
+    padding:14px 24px; border-radius:99px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; border:1.5px solid transparent;
+    transition: transform 0.2s ease, background 0.2s ease, border-color .2s ease, color .2s ease;
+  }
+  .btn-fill{ background:var(--ink); color:var(--cream); }
+  .btn-fill:hover{ background:var(--rust); transform:translateY(-2px); }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); }
+  .btn-outline:hover{ border-color:var(--rust); color:var(--rust); transform:translateY(-2px); }
+
+  /* hero signature graphic: layered cards mimicking a UI stack, hand-tilted */
+  .hero-art{ position:relative; height:360px; }
+  .stack-card{
+    position:absolute; border-radius:16px; border:1px solid var(--line); background:var(--cream);
+    box-shadow: 0 24px 50px -28px rgba(33,30,26,0.35);
+  }
+  .stack-card.c1{ width:230px; height:280px; top:10px; left:30px; transform:rotate(-7deg); padding:18px; }
+  .stack-card.c2{ width:230px; height:280px; top:55px; left:140px; transform:rotate(5deg); background:var(--ink); border-color:var(--dark-line); padding:18px; }
+  .stack-card.c3{ width:120px; height:90px; bottom:6px; left:6px; transform:rotate(4deg); background:var(--rust); border:none; display:flex; align-items:center; justify-content:center; }
+  .stack-card.c3 span{ font-family:'JetBrains Mono',monospace; color:var(--cream); font-size:12px; letter-spacing:.04em; }
+  .swatch-row{ display:flex; gap:6px; margin-bottom:14px; }
+  .swatch{ width:9px; height:9px; border-radius:50%; }
+  .swatch.r{ background:#e08a6a; } .swatch.y{ background:#e0c46a; } .swatch.g{ background:#7fae74; }
+  .mock-line{ height:8px; border-radius:3px; background:var(--line); margin-bottom:9px; }
+  .mock-line.short{ width:55%; }
+  .mock-line.dark{ background:var(--dark-line); }
+  .mock-line.dark.short{ width:50%; }
+  .mock-line.rust{ background:var(--rust); width:35%; height:10px; margin-top:14px; }
+  @media (max-width: 880px){
+    .hero-grid{ grid-template-columns:1fr; gap:var(--space-5); }
+    .hero-art{ height:260px; }
+    .stack-card.c1{ left:10px; width:190px; height:230px; }
+    .stack-card.c2{ left:110px; width:190px; height:230px; top:30px; }
+  }
+
+  /* ---- SECTION SHELL ---- */
+  section{ padding:var(--space-6) 0; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--rust);
+    display:flex; align-items:center; gap:8px; margin:0 0 var(--space-2);
+  }
+  .eyebrow::before{ content:""; width:18px; height:1.5px; background:var(--rust); }
+  .sec-title{ font-size:30px; margin-bottom:var(--space-4); max-width:560px; }
+
+  #about{ border-top:1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:var(--space-6); align-items:start; }
+  .about-statement{ font-family:'Fraunces',Georgia,serif; font-size:25px; line-height:1.45; font-weight:400; }
+  .about-grid p.body{ color:var(--ink-soft); margin:0 0 var(--space-2); }
+  @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; gap:var(--space-3); } }
+
+  /* SKILLS */
+  #skills{ border-top:1px solid var(--line); }
+  .skills-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-4); }
+  .skill-card{
+    border:1px solid var(--line); border-radius:14px; padding:var(--space-3);
+    background:var(--cream); transition: transform .25s ease, border-color .25s ease;
+  }
+  .skill-card:hover{ transform:translateY(-4px); border-color:var(--rust); }
+  .skill-card h3{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--rust); margin:0 0 var(--space-2); font-weight:500;
+  }
+  .skill-card ul{ list-style:none; margin:0; padding:0; }
+  .skill-card li{ font-size:14.5px; color:var(--ink-soft); padding:5px 0; border-top:1px solid var(--line); }
+  .skill-card li:first-child{ border-top:none; }
+  @media (max-width:880px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .skills-grid{ grid-template-columns:1fr; } }
+
+  /* EXPERIENCE */
+  #experience{ border-top:1px solid var(--line); }
+  .role{ display:grid; grid-template-columns:140px 1fr; gap:var(--space-4); padding:var(--space-3) 0; border-top:1px solid var(--line); }
+  .role:first-child{ border-top:none; }
+  .role-date{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-faint); padding-top:3px; }
+  .role-title{ font-size:18px; font-weight:600; }
+  .role-org{ color:var(--rust); font-size:14.5px; margin-top:2px; }
+  .role-desc{ color:var(--ink-soft); margin-top:var(--space-1); font-size:15.5px; max-width:560px; }
+  @media (max-width:600px){ .role{ grid-template-columns:1fr; gap:6px; } }
+
+  /* PROJECTS — dark contrast band */
+  #work{ background:var(--dark); color:var(--on-dark); border-radius: 28px; margin: var(--space-5) auto; max-width:1280px; }
+  #work .wide{ padding-top:var(--space-6); padding-bottom:var(--space-6); }
+  #work .eyebrow{ color:#e0a98c; }
+  #work .eyebrow::before{ background:#e0a98c; }
+  #work .sec-title{ color:var(--on-dark); }
+  .project-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-3); }
+  .project-card{
+    background:#2a261f; border:1px solid var(--dark-line); border-radius:16px; padding:var(--space-4);
+    display:flex; flex-direction:column; gap:var(--space-2);
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .project-card:hover{ transform:translateY(-5px); border-color:#e0a98c; }
+  .project-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .project-title{ font-family:'Fraunces',serif; font-size:21px; color:var(--on-dark); }
+  .project-year{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--on-dark-soft); }
+  .project-desc{ color:var(--on-dark-soft); font-size:14.5px; flex:1; }
+  .project-stack{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#e0a98c; }
+  .project-links{ display:flex; gap:var(--space-3); margin-top:4px; }
+  .project-links a{ font-size:13.5px; font-weight:600; text-decoration:none; color:var(--on-dark); border-bottom:1px solid var(--dark-line); padding-bottom:2px; }
+  .project-links a:hover{ color:#e0a98c; border-color:#e0a98c; }
+  @media (max-width:760px){ .project-grid{ grid-template-columns:1fr; } }
+
+  /* RESUME */
+  #resume{ padding-top:var(--space-6); }
+  .resume-panel{
+    display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); flex-wrap:wrap;
+    background:var(--cream); border:1px solid var(--line); border-radius:18px; padding:var(--space-4) var(--space-5);
+  }
+  .resume-panel .ttl{ font-family:'Fraunces',serif; font-size:21px; }
+  .resume-panel .sub{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-faint); margin-top:4px; }
+  .resume-actions{ display:flex; gap:var(--space-2); }
+
+  /* CONTACT */
+  #contact{ border-top:1px solid var(--line); }
+  #contact .lede{ color:var(--ink-soft); max-width:520px; margin-top:var(--space-2); }
+  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-3); margin-top:var(--space-4); }
+  .contact-card{
+    border:1px solid var(--line); border-radius:14px; padding:var(--space-3); text-decoration:none; color:var(--ink);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    background:var(--cream);
+  }
+  .contact-card:hover{ transform:translateY(-4px); border-color:var(--rust); background:#fff; }
+  .contact-card .tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--rust); text-transform:uppercase; letter-spacing:.05em; }
+  .contact-card .val{ font-family:'Fraunces',serif; font-size:17px; margin-top:8px; }
+  @media (max-width:680px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  footer{ padding:var(--space-4) 0 var(--space-5); display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--space-2);
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-faint); }
+  footer a{ color:var(--ink-faint); text-decoration:none; margin-left:var(--space-3); }
+  footer a:hover{ color:var(--rust); }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="frame">
+    <a href="#" class="mark"><span class="dot"></span>Akshat Dutt Bhatt</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="frame hero-grid">
+    <div>
+      <p class="kicker">Web Developer · Uttarakhand</p>
+      <h1>I build interfaces that feel <span class="accent-word">fast</span> and look <span class="accent-word">deliberate</span>.</h1>
+      <p class="lede">I create modern, responsive websites and web applications with a focus on performance and user experience.</p>
+      <div class="actions">
+        <a class="btn btn-fill" href="#work">View projects</a>
+        <a class="btn btn-outline" href="#resume">Resume</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="stack-card c1">
+        <div class="swatch-row"><span class="swatch r"></span><span class="swatch y"></span><span class="swatch g"></span></div>
+        <div class="mock-line"></div>
+        <div class="mock-line short"></div>
+        <div class="mock-line"></div>
+        <div class="mock-line rust"></div>
+      </div>
+      <div class="stack-card c2">
+        <div class="swatch-row"><span class="swatch r"></span><span class="swatch y"></span><span class="swatch g"></span></div>
+        <div class="mock-line dark"></div>
+        <div class="mock-line dark short"></div>
+        <div class="mock-line dark"></div>
+      </div>
+      <div class="stack-card c3"><span>&lt;/&gt; build</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="frame reveal">
+    <p class="eyebrow">About</p>
+    <div class="about-grid">
+      <p class="about-statement">I'm a web developer based in Uttarakhand, passionate about creating fast, accessible, and user-friendly websites and applications.</p>
+      <div>
+        <p class="body">With a background in computer science and a focus on modern web technologies, I bring a unique perspective to building digital experiences.</p>
+        <p class="body">These days I focus on creating efficient, scalable solutions that provide an excellent user experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="frame reveal">
+    <p class="eyebrow">Skills</p>
+    <h2 class="sec-title">What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Frontend</h3>
+        <ul><li>React</li><li>TypeScript</li><li>Tailwind CSS</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Backend</h3>
+        <ul><li>Node.js</li><li>Express</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <ul><li>JavaScript</li><li>TypeScript</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Tools</h3>
+        <ul><li>Git</li><li>VS Code</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="frame reveal">
+    <p class="eyebrow">Experience</p>
+    <h2 class="sec-title">Where I've worked</h2>
+
+    <div class="role">
+      <span class="role-date">July 2025 - August 2025</span>
+      <div>
+        <div class="role-title">Frontend Engineer</div>
+        <div class="role-org">IIT Roorkee</div>
+        <p class="role-desc">Create a modern, responsive web application for the committee called "Campus Fauna" under the guidance of honorable Chairman of the committee.</p>
+      </div>
+    </div>
+</section>
+
+<section id="work">
+  <div class="wide reveal">
+    <p class="eyebrow">Selected work</p>
+    <h2 class="sec-title">Projects</h2>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-title">Weatherly</span>
+          <span class="project-year">2024</span>
+        </div>
+        <p class="project-desc"> 	Built a weather forecasting web app that pulls live conditions and forecasts through a weather API..</p>
+        <span class="project-stack">React · Tailwind CSS · OpenWeatherMap API</span>
+        <div class="project-links"><a href="https://weaherly.netlify.app/" target="_blank" rel="noopener">View</a></div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-title">Component kit</span>
+          <span class="project-year">2022</span>
+        </div>
+        <p class="project-desc">Open-source set of accessible React components with Storybook documentation, adopted across three product teams.</p>
+        <span class="project-stack">TypeScript · Storybook</span>
+        <div class="project-links"><a href="#" target="_blank" rel="noopener">View</a><a href="#" target="_blank" rel="noopener">Code</a></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="frame reveal">
+    <p class="eyebrow">Resume</p>
+    <div class="resume-panel">
+      <div>
+        <div class="ttl">akshat_resume.pdf</div>
+        <div class="sub">Updated June 2026 · 1 page</div>
+      </div>
+      <div class="resume-actions">
+        <a class="btn btn-outline" href="Akshat_Resume (1).pdf" target="_blank" rel="noopener">View</a>
+        <a class="btn btn-fill" href="Akshat_Resume (1).pdf" download>Download</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="frame reveal">
+    <p class="eyebrow">Contact</p>
+    <h2 class="sec-title">Let's talk</h2>
+    <p class="lede">Open to web developmentroles, and happy to hear about interesting freelance work too.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:bhattakshat855@gmail.com"><span class="tag">Email</span><div class="val">bhattakshat855@gmail.com</div></a>
+      <a class="contact-card" href="https://www.linkedin.com/in/akshat-dutt-bhatt-4569443ba?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener"><span class="tag">LinkedIn</span><div class="val">akshat-dutt-bhatt</div></a>
+      <a class="contact-card" href="https://github.com/bhattakshat855-star" target="_blank" rel="noopener"><span class="tag">GitHub</span><div class="val">/akshat bhatt</div></a>
+    </div>
+  </div>
+</section>
+
+<footer class="frame">
+  <span><a href="mailto:bhattakshat855@gmail.com">Email</a><a href="https://www.linkedin.com/in/akshat-dutt-bhatt-4569443ba?utm_source=share_via&utm_content=profile&utm_medium=member_ios">LinkedIn</a><a href="https://github.com/bhattakshat855-star">GitHub</a></span>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{ threshold:0.1 });
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
